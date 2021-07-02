@@ -1,0 +1,5 @@
+<li class="list-group-item">
+    <input type="checkbox" [id]="id" [checked]="done" (change)="fieldsChange($event)">
+    <label [for]="id">{{ taskName }}</label>
+    <a [routerLink]="id">Edit</a>
+</li>

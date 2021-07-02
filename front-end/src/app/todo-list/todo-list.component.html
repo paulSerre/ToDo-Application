@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Mes appareils</h2>
+        <ul class="list-group">
+          <app-task *ngFor="let task of tasks; let i = index;"
+                    [index]="i"
+                    [id]="task.id"
+                    [done]="task.done"
+                    [taskName]="task.title"></app-task>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+          <input placeholder="New Task" type="text" id="title" class="form-control" name="title" ngModel required>
+          <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enregistrer</button>
+        </form>
+      </div>
+    </div>
+</div>
