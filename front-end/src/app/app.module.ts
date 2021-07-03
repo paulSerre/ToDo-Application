@@ -7,19 +7,15 @@ import { TodoListComponent } from './todo-list/todo-list.component';
 import { SingleTaskComponent } from './todo-list/single-task/single-task.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { TaskComponent } from './todo-list/task/task.component';
 import { FormsModule } from '@angular/forms';
 import { FoldersListComponent } from './folders-list/folders-list.component';
-import { FolderComponent } from './folders-list/folder/folder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     SingleTaskComponent,
-    TaskComponent,
-    FoldersListComponent,
-    FolderComponent
+    FoldersListComponent
   ],
   imports: [
     BrowserModule,

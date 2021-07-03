@@ -3,11 +3,18 @@
       <div class="col-xs-12">
         <h2> {{ currentFolder.title }} </h2>
         <ul class="list-group">
+          <!---
           <app-task *ngFor="let task of tasks; let i = index;"
                     [index]="i"
                     [id]="task.taskId"
                     [done]="task.done"
-                    [taskName]="task.title"></app-task>
+                    [taskName]="task.title"></app-task> -->
+          <li *ngFor="let task of tasks" class="list-group-item" >
+            <input type="checkbox" [id]="task.taskId" [checked]="task.done" (change)="fieldsChange($event, task)">
+            <label [for]="task.taskId">{{ task.title }}</label>
+            <a [routerLink]="['tasks',task.taskId]">Edit</a>
+            <a [routerLink]="" (click)="delete(task.taskId)">Remove</a>
+          </li>
         </ul>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -54,6 +54,15 @@ export class TodoListComponent implements OnInit, OnDestroy {
     const newTask = new Task(false, title, this.currentFolder.folderId);
     this.taskService.createNewTask(newTask);
     form.reset();
+  }
+
+  fieldsChange(event:any, task: Task):void {
+    const newTask = new Task(event.currentTarget.checked, task.title, task.folderId);
+    this.taskService.updateTask(newTask, task.taskId);
+  }
+
+  delete(id: number) {
+    this.taskService.deleteTask(id);
   }
 
 }

@@ -36,4 +36,8 @@ export class FoldersListComponent implements OnInit {
     form.reset();
   }
 
+  delete(id: number) {
+    this.foldersService.deleteFolder(id);
+  }
+
 }

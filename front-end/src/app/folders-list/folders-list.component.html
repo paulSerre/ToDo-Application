@@ -3,10 +3,16 @@
       <div class="col-xs-12">
         <h2>Folders</h2>
         <ul class="list-group">
+      <!--
           <app-folder *ngFor="let folder of folders; let i = index;"
                     [index]="i"
                     [id]="folder.folderId"
-                    [folderName]="folder.title"></app-folder>
+                    [folderName]="folder.title"></app-folder>-->
+          <li *ngFor="let folder of folders" class="list-group-item">
+            <label [for]="folder.folderId">{{ folder.title }}</label>
+            <a [routerLink]="folder.folderId">View Items</a>
+            <a [routerLink]="" (click)="delete(folder.folderId)">Remove</a>
+          </li>
         </ul>
       </div>
     </div>
