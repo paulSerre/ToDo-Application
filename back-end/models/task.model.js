@@ -4,6 +4,7 @@ const sql = require("./db.js");
 const Task = function(task) {
   this.done = task.done;
   this.title = task.title;
+  this.folderId = task.folderId;
 };
 
 Task.create = (newTask, result) => {
@@ -13,8 +14,8 @@ Task.create = (newTask, result) => {
             result(err, null);
             return;
         }
-        console.log("created task: ", { ...newTask });
-        result(null, { ...newTask });
+        console.log("created task: ", {"taskId": res.insertId, ...newTask });
+        result(null, {"taskId": res.insertId, ...newTask });
     });
 };
 
@@ -32,7 +33,7 @@ Task.getAll = result => {
 
 Task.updateById = (id, task, result) => {
     sql.query(
-        "UPDATE tasks SET done = ?, title = ? WHERE id = ?",
+        "UPDATE tasks SET done = ?, title = ? WHERE taskId = ?",
         [task.done, task.title, id],
         (err, res) => {
             if (err) {
@@ -50,5 +51,6 @@ Task.updateById = (id, task, result) => {
         }
     );
 };
+
 
 module.exports = Task;

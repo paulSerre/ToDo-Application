@@ -22,9 +22,10 @@ export class TasksService {
   }
 
   getTaskById(id: number) {
+    console.log(this.tasks);
     const task = this.tasks.find(
       (s) => {
-        return s.id === id;
+        return s.taskId === id;
       }
     );
     return task;
@@ -39,7 +40,6 @@ export class TasksService {
       .get<any>(this.url+this.endpoint)
       .subscribe(
         (response) => {
-          console.log(response);
           this.tasks = response;
           this.emitTaskSubject();
         },
@@ -55,18 +55,17 @@ export class TasksService {
    * Add a task to database.
    */
   createNewTask(newTask: Task) {
-    this.tasks.push(newTask);
     // Add to database
     this.http
       .post(this.url+this.endpoint, {
-        "id": newTask.id,
         "done": newTask.done,
-        "title": newTask.title
+        "title": newTask.title,
+        "folderId": newTask.folderId
       })
       .subscribe(
-        (_) => {
-          console.log("Successfully added.");
-          // Update view
+        (response: Task) => {
+          console.log("Successfully added.", response);
+          this.tasks.push(response);
           this.emitTaskSubject();
         },
         (error) => {
@@ -75,16 +74,17 @@ export class TasksService {
       )
   }
 
-  updateTask(newTask: Task) {
+  updateTask(newTask: Task, taskId: number) {
     // Replace in tasks list
-    const elementPos = this.tasks.map(function(o) {return o.id; }).indexOf(newTask.id);
-    this.tasks[elementPos] = newTask;
+    const elementPos = this.tasks.map(function(o) {return o.taskId; }).indexOf(taskId);
+    const exTask = this.tasks[elementPos];
+    this.tasks[elementPos] = Object.assign(exTask,newTask);
     // Replace in database
     this.http
-      .put(this.url+this.endpoint+"/"+newTask.id, {
-        "taskId": newTask.id,
+      .put(this.url+this.endpoint+"/"+taskId, {
         "done": newTask.done,
-        "title": newTask.title
+        "title": newTask.title,
+        "folderId": newTask.folderId
       })
       .subscribe(
         (_) => {

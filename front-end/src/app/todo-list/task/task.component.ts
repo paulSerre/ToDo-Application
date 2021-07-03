@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Task } from 'src/app/models/task.model';
 import { TasksService } from 'src/app/services/tasks.service';
 
@@ -13,10 +14,14 @@ export class TaskComponent  {
   @Input() index: number;
   @Input() taskName: string;
 
-  constructor(private taskService: TasksService) { }
+  constructor(private taskService: TasksService,
+              private route: ActivatedRoute) { 
+  }
 
   fieldsChange(values:any):void {
-    this.taskService.updateTask(new Task(this.id, values.currentTarget.checked, this.taskName));
+    const folderId: number = +this.route.snapshot.params['folderId'];
+    console.log(this.id);
+    this.taskService.updateTask(new Task(values.currentTarget.checked, this.taskName, folderId), this.id);
   }
 
 }

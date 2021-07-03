@@ -11,7 +11,8 @@ exports.create = (req, res) => {
     // Create a Task
     const task = new Task({
         done: req.body.done,
-        title: req.body.title
+        title: req.body.title,
+        folderId: req.body.folderId
     });
   
     // Save Task in the database

@@ -9,13 +9,17 @@ import { SingleTaskComponent } from './todo-list/single-task/single-task.compone
 import { HttpClientModule } from '@angular/common/http';
 import { TaskComponent } from './todo-list/task/task.component';
 import { FormsModule } from '@angular/forms';
+import { FoldersListComponent } from './folders-list/folders-list.component';
+import { FolderComponent } from './folders-list/folder/folder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TodoListComponent,
     SingleTaskComponent,
-    TaskComponent
+    TaskComponent,
+    FoldersListComponent,
+    FolderComponent
   ],
   imports: [
     BrowserModule,

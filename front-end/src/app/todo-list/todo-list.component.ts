@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { Task } from '../models/task.model';
@@ -12,19 +13,25 @@ import { TasksService } from '../services/tasks.service';
 })
 export class TodoListComponent implements OnInit, OnDestroy {
 
+
+  folderId: number;
+
   tasks: Task[];
   taskSubscription: Subscription;
 
-  constructor(private taskService: TasksService) { }
+  constructor(private taskService: TasksService,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.folderId = +this.route.snapshot.params['folderId'];
     this.taskSubscription = this.taskService.taskSubject.subscribe(
       (tasks: Task[]) => {
-        this.tasks = tasks;
+        this.tasks = tasks.filter(t => t.folderId === this.folderId);
       }
     );
     this.taskService.emitTaskSubject();
   }
+
 
   ngOnDestroy() {
     this.taskSubscription.unsubscribe();
@@ -32,9 +39,9 @@ export class TodoListComponent implements OnInit, OnDestroy {
 
   onSubmit(form: NgForm) {
     const title = form.value['title'];
-    console.log(this.tasks[this.tasks.length-1].id+1);
-    const newTask = new Task(this.tasks[this.tasks.length-1].id+1,false, title);
+    const newTask = new Task(false, title, this.folderId);
     this.taskService.createNewTask(newTask);
+    form.reset();
   }
 
 }

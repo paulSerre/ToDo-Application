@@ -1,23 +1,21 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h2>To-Do list</h2>
+        <h2>Folders</h2>
         <ul class="list-group">
-          <app-task *ngFor="let task of tasks; let i = index;"
+          <app-folder *ngFor="let folder of folders; let i = index;"
                     [index]="i"
-                    [id]="task.taskId"
-                    [done]="task.done"
-                    [taskName]="task.title"></app-task>
+                    [id]="folder.folderId"
+                    [folderName]="folder.title"></app-folder>
         </ul>
       </div>
     </div>
     <div class="row">
       <div class="col-xs-12">
         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-          <input placeholder="New Task" type="text" id="title" class="form-control" name="title" ngModel required>
+          <input placeholder="New Folder" type="text" id="title" class="form-control" name="title" ngModel required>
           <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enregistrer</button>
         </form>
-        <button class="btn btn-primary" [routerLink]="'/folders'">Back</button>
       </div>
     </div>
 </div>

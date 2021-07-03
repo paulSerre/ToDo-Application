@@ -1,16 +1,17 @@
 export class Task {
-    id: number;
+    taskId: number;
     done: boolean;
     title: string;
+    folderId: number;
     /*
     constructor(done: boolean, title: string) {
         this.done = done;
         this.title = title;
     }*/
 
-    constructor(id:number, done: boolean, title: string) {
-        this.id = id;
+    constructor(done: boolean, title: string, folderId: number) {
         this.done = done;
         this.title = title;
+        this.folderId = folderId;
     }
 }

@@ -14,19 +14,18 @@ export class SingleTaskComponent implements OnInit {
   currentTask: Task;
 
   constructor(private tasksService: TasksService,
-              private route: ActivatedRoute,
-              private router: Router) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    const id = this.route.snapshot.params['taskId'];
+    console.log(id);
     this.currentTask = this.tasksService.getTaskById(+id);
   }
 
   onSubmit(form: NgForm) {
     this.currentTask.title = form.value['title'];
     console.log(this.currentTask);
-    this.tasksService.updateTask(this.currentTask);
+    this.tasksService.updateTask(this.currentTask, this.currentTask.taskId);
     this.tasksService.emitTaskSubject();
-    this.router.navigate(["tasks"]);
   }
 }
