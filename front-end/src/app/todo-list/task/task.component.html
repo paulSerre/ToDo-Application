@@ -2,4 +2,5 @@
     <input type="checkbox" [id]="id" [checked]="done" (change)="fieldsChange($event)">
     <label [for]="id">{{ taskName }}</label>
     <a [routerLink]="['tasks',id]">Edit</a>
+    <a [routerLink]="" (click)="delete()">Remove</a>
 </li>

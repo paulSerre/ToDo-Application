@@ -22,7 +22,6 @@ export class TasksService {
   }
 
   getTaskById(id: number) {
-    console.log(this.tasks);
     const task = this.tasks.find(
       (s) => {
         return s.taskId === id;
@@ -92,6 +91,23 @@ export class TasksService {
         },
         (error) => {
           console.log("Error : ", error)
+        }
+      )
+  }
+
+  deleteTask(taskId: number) {
+    // Delete the element from view.
+    const elementPos = this.tasks.map(t => t.taskId).indexOf(taskId);
+    this.tasks.splice(elementPos,1);
+    this.http
+      .delete(this.url+this.endpoint+"/"+taskId)
+      .subscribe(
+        (_) => {
+          console.log("Successfully deleted.");
+          this.emitTaskSubject();
+        },
+        (error) => {
+          console.log("Error : ", error);
         }
       )
   }

@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12">
-        <h2>To-Do list</h2>
+        <h2> {{ currentFolder.title }} </h2>
         <ul class="list-group">
           <app-task *ngFor="let task of tasks; let i = index;"
                     [index]="i"

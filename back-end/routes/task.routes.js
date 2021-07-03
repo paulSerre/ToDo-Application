@@ -9,5 +9,6 @@ module.exports = app => {
 
     // Update one task by id
     app.put("/tasks/:taskId", tasks.update);
-  
+
+    app.delete("/tasks/:taskId", tasks.delete);
 };

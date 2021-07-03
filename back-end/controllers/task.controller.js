@@ -7,7 +7,6 @@ exports.create = (req, res) => {
         message: "Content can not be empty!"
       });
     }
-    console.log(req.body);
     // Create a Task
     const task = new Task({
         done: req.body.done,
@@ -62,3 +61,19 @@ exports.update = (req, res) => {
             } else res.send(data);
     });
 };
+
+exports.delete = (req, res) => {
+    Task.remove(req.params.taskId, (err, data) => {
+      if (err) {
+        if (err.kind === "not_found") {
+          res.status(404).send({
+            message: `Not found Task with id ${req.params.taskId}.`
+          });
+        } else {
+          res.status(500).send({
+            message: "Could not delete Task with id " + req.params.taskId
+          });
+        }
+      } else res.send({ message: `Task was deleted successfully!` });
+    });
+  };

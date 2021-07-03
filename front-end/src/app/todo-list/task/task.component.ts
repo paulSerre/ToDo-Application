@@ -20,8 +20,11 @@ export class TaskComponent  {
 
   fieldsChange(values:any):void {
     const folderId: number = +this.route.snapshot.params['folderId'];
-    console.log(this.id);
     this.taskService.updateTask(new Task(values.currentTarget.checked, this.taskName, folderId), this.id);
+  }
+
+  delete() {
+    this.taskService.deleteTask(this.id);
   }
 
 }
