@@ -1,0 +1,36 @@
+version: "3"
+services:
+    db:
+      container_name: db
+      image: mysql:latest
+      ports:
+       - "6033:3306"  
+      environment:
+         - MYSQL_ROOT_PASSWORD=mysql
+         - MYSQL_DATABASE=ensolvers_database
+      volumes:
+         - ./mysql-init-files/data:/var/lib/mysql
+         - ./mysql-init-files/init:/docker-entrypoint-initdb.d/:ro
+    
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin
+        container_name: pma
+        links:
+            - db
+        environment:
+            PMA_HOST: db
+            PMA_PORT: 3306
+            PMA_ARBITRARY: 1
+        restart: always
+        ports:
+            - 8081:81
+
+    backend:
+        container_name: backend
+        build: ../back-end
+        depends_on: 
+            - db
+        links:
+            - db
+        ports:
+            - "5000:5000"
