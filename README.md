@@ -28,6 +28,6 @@ The frontend is served with nginx.
 
 ### Manually
 
-You can start it manually by doing the following:
+You can start it manually by importing the database schema in docker-compose/mysql-init-files/init/ensolvers.sql, then put db information in backend/config/db.config.js, and start back and frontend manually.
 
 
