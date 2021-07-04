@@ -3,7 +3,8 @@
 /front-end/node_modules
 /back-end/node_modules
 /docker-compose/mysql-init-files/data/
-ensolvers-app
+.gitignore
+
 
 # compiled output
 front-end/dist
