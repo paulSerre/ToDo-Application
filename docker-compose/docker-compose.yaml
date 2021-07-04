@@ -28,6 +28,7 @@ services:
     backend:
         container_name: backend
         build: ../back-end
+        restart: always
         depends_on: 
             - db
         links:
@@ -37,6 +38,7 @@ services:
 
     frontend:
         container_name: frontend
+        restart: always
         build: ../front-end
         depends_on: 
             - db
