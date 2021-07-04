@@ -1,6 +1,14 @@
-<h2>Edit task "{{ currentTask.title }}"</h2>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm">
-    <input [placeholder]="currentTask.title" type="text" id="title" class="form-control" name="title" ngModel required>
-    <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enregistrer</button>
-</form>
-<a routerLink="../..">Cancel</a>
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <h2>Edit task "{{ currentTask.title }}"</h2>
+        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+            <input [placeholder]="currentTask.title" type="text" id="title" class="form-control" name="title" ngModel required>
+            <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Enregistrer</button>
+        </form>
+        <button class="btn btn-danger" routerLink="../..">Cancel</button>
+      </div>
+    </div>
+</div>
+
+

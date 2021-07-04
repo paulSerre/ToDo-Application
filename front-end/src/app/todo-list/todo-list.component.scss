@@ -1,0 +1,29 @@
+.container {
+    padding: 1rem;
+    border-color: rgb(195, 195, 195);
+    border-style: solid;
+    border-width: 0.2rem;
+    width: 50rem;
+}
+
+li {
+    display: flex;
+    inline-size: 50%;
+}
+
+li > * {
+    margin-left: 0.5rem;
+}
+
+li>:nth-child(3) {
+    margin-left: auto;
+}
+
+div {
+    padding: 0.3rem;
+}
+
+form {
+    display: flex;
+    width: 75%;
+}
